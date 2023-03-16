@@ -4,8 +4,9 @@ RM = rm -rf
 
 NAME = so_long
 
-SRCS = main.c\
-		
+SRCS = 	main.c\
+		mayalabeille/get_next_line.c \
+		mayalabeille/get_next_line_utils.c \
 
 OBJ	= ${SRCS:.c=.o}
 
@@ -22,11 +23,12 @@ $(NAME): $(OBJ)
 all: ${NAME}
 
 clean:
-	${RM} ${OBJ} ${BONUS_OBJS}
+	${RM} ${OBJ}
 
 fclean: clean
-	make clean -C minilibx
-	${RM} ${NAME} ${BONUS_NAME}
+	make clean -C minilibx-linux
+	make clean -C so_long
+	${RM} ${NAME} 
 
 re: fclean all
 
