@@ -1,6 +1,5 @@
-#include "minilibx-linux/mlx.h"
-#include "mayalabeille/get_next_line.h"
-#include <stdio.h>
+#include "so_long.h"
+
 
 
 int ftstrlen(char *str)
@@ -13,11 +12,6 @@ int ftstrlen(char *str)
 	return (i);
 }
 
-
-
-
-
-
 char **ft_maps(char *str, char **tab)
 {
 	static int i = 0;
@@ -25,7 +19,7 @@ char **ft_maps(char *str, char **tab)
 	int j = i - 1;
 	int k = 0; 
 
-	map = malloc(sizeof(char*) * i + 1);
+	map = malloc(sizeof(char*) * i + 2);
 	map[i] = malloc(sizeof(char) * ftstrlen(str) + 1);
 	while(j >= 0)
 	{
@@ -46,21 +40,11 @@ char **ft_maps(char *str, char **tab)
 		k++;
 	}
 	map[i][k] = 0;
+	map[i + 1] = NULL;
 	i++;
-	printf("Je suis i : %d\n", i);
-	printf("Je suis j : %d\n", j);
-	printf("Je suis k : %d\n", k);
+	// ft_check_master(map);
 	return(map);
 }
-
-int check_master(char **map)
-{
-
-}
-
-
-
-
 
 int main(int ac, char **av)
 {
@@ -82,20 +66,14 @@ int main(int ac, char **av)
 			free(str);
 			str = get_next_line(fd);
 		}
-		printf("TOUT EST OK MON REUF");
 	}
-	while(j < 18)
+	i = 0;
+	while(tab[i])
 	{
-		k = 0;
-		while(tab[j][k])
-		{
-			printf("%c ", tab[j][k]);
-			k++;
-		}
-		
-		j++;
-	}
-
+		printf("%s\n", tab[i]);
+		i++;
+	} 
+	ft_check_master(tab);
 	close(fd);
 	return (0);
 }
