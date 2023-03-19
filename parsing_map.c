@@ -2,6 +2,31 @@
 
 
 
+int ft_check_parasit(char **tab)
+{
+	int i = 0;
+	int j;
+	int searchPara = 0;
+   
+    while(tab[i])
+	{
+		j = 0;
+		while(tab[i][j])
+		{
+			if(tab[i][j] != 'C' && tab[i][j] != 'E' && tab[i][j] != 'P' && tab[i][j] != '1' && tab[i][j] != '0')
+			{
+				searchPara++;
+			}
+			j++;
+		}
+		i++;
+	}
+	if(searchPara != 0)
+		return(1);
+	return (0);
+}
+  
+
 int ft_check_square(char **tab)
 {
 	int i = 0;
@@ -49,13 +74,13 @@ int ft_check_wall(char **tab)
         j = 0;
 		i++;
 	}
-	// topNbot = 0;
-	// while(topNbot < k)
-	// {
-	// 	if(tab[i][topNbot] != '1')
-	// 		return (1);
-	// 	topNbot++;
-	// }
+	 topNbot = 0;
+	 while(topNbot < k)
+	 {
+	 	if(tab[i - 1][topNbot] != '1')
+	 		return (1);
+	 	topNbot++;
+	 }
 	return (0);
 }
 
@@ -66,11 +91,10 @@ int ft_valid_path(char **tab,int Y, int X, int Collect)
 	int dx[] = {-1, 0, 1, 0};
 	int dy[] = {0, 1, 0, -1};
 	static int c = 0;
-	printf("Bnjour je suis collect : %d\n",Collect);
 	
 	if(tab[Y][X] == 'C')
 		c++;
-	printf("Bnjour je suis c : %d\n",c);
+	
 
 
 	if(tab[Y][X] == 'E')
@@ -110,7 +134,6 @@ int ft_check_line(char **tab)
 	int j;
     int temp;
     temp = ftstrlen(tab[0]);
-	printf("je suis Temp %d\n", temp);
     while(tab[i])
 	{
 		j = 0;
@@ -118,8 +141,6 @@ int ft_check_line(char **tab)
 		{
 			j++;
 		}
-	printf("je suis j %d\n", j);
-
 		if(temp != j)
             return (1);
         j = 0;
@@ -161,38 +182,23 @@ int ft_check_cpe(char **tab)
 	}
 	if(p != 1 && e != 1 && c < 1)
 		return(1);
-		
-	
 	if(ft_valid_path(tab,Y,X,c) == 0)
-	{
 		return (1);
-	}
-
 	return (0);
-
 }
 
 int ft_check_master(char **map)
 {
 	
-    if(ft_check_line(map))
-    {
-        printf("aaaaa\n");
-		
-    }
+    if(ft_check_line(map)) 
+        printf("Error\n");
+	else if(ft_check_parasit(map))
+		printf("koikoubeh\n");
 	else if(ft_check_square(map))
-	{
-		printf("bbbbbb\n");
-		
-	}
+		printf("Error\n");
 	else if(ft_check_wall(map))
-	{
-		printf("cccccc\n");
-	}
-	else if(ft_check_cpe(map) == 1)
-	{
-		printf("dddddd\n");
-	}
-
+		printf("Error\n");
+	else if(ft_check_cpe(map))
+		printf("Error\n");
 	return (0);
-}
+} ;
