@@ -5,9 +5,12 @@ RM = rm -rf
 NAME = so_long
 
 SRCS = 	main.c\
+		win.c \
 		mayalabeille/get_next_line.c \
 		mayalabeille/get_next_line_utils.c \
 		parsing_map.c \
+		init_Struct.c \
+
 
 OBJ	= ${SRCS:.c=.o}
 

@@ -187,18 +187,33 @@ int ft_check_cpe(char **tab)
 	return (0);
 }
 
+
 int ft_check_master(char **map)
 {
-	
-    if(ft_check_line(map)) 
-        printf("Error\n");
+    if(ft_check_line(map))
+	{
+		printf("Error\n");
+		return (1);
+	} 
 	else if(ft_check_parasit(map))
-		printf("koikoubeh\n");
+	 {
+		printf("Error\n");
+		return (1);
+	 }
 	else if(ft_check_square(map))
+	{
 		printf("Error\n");
+		return(1);
+	}
 	else if(ft_check_wall(map))
+	{
 		printf("Error\n");
+		return (1);
+	}
 	else if(ft_check_cpe(map))
+	{
 		printf("Error\n");
+		return (1);
+	}
 	return (0);
-} ;
+}

@@ -12,6 +12,9 @@ int ftstrlen(char *str)
 	return (i);
 }
 
+
+
+
 char **ft_maps(char *str, char **tab)
 {
 	static int i = 0;
@@ -47,7 +50,9 @@ char **ft_maps(char *str, char **tab)
 }
 
 int main(int ac, char **av)
-{
+{	
+	t_vars	vars;
+	
 	char	*str;
 	int fd = open(av[1], O_RDONLY);
 	int i = 0;
@@ -55,7 +60,6 @@ int main(int ac, char **av)
 	int j = 0;
 	int k = 0;
 
-	
 	if (fd >= 0)
 	{
 		str = get_next_line(fd);
@@ -68,13 +72,20 @@ int main(int ac, char **av)
 		}
 	}
 	i = 0;
-	while(tab[i])
+	if(ft_check_master(tab))
+		return (1);
+	else
 	{
-		printf("%s\n", tab[i]);
-		i++;
-	} 
-	ft_check_master(tab);
-	close(fd);
+		
+		ft_count(tab,&vars);
+		
+		vars.mlx = mlx_init();
+		vars.win = mlx_new_window(vars.mlx, vars.col * 50, vars.row * 50, "Many Corp");
+		init_image(&vars);
+		Print_image(tab);
+		mlx_key_hook(vars.win, key_hook, &vars);
+		mlx_loop(vars.mlx); 
+	}
 	return (0);
 }
 
@@ -102,28 +113,25 @@ int main(int ac, char **av)
 
 // -- PERMET DE FERMER LA FENETRE SUR UNE TOUCHE -- \\
 
-// typedef struct	s_vars {
-// 	void	*mlx;
-// 	void	*win;
-// }				t_vars;
 
-// int	close(int keycode, t_vars *vars)
-// {
-// 	mlx_destroy_window(vars->mlx, vars->win);
-// 	return (0);
-// }
+/*
+ int	close(int keycode, t_vars *vars)
+ {
+ 	mlx_destroy_window(vars->mlx, vars->win);
+ 	return (0);
+ }
 
-// int	main(void)
-// {
-// 	t_vars	vars;
+ int	main(void)
+ {
+ 	t_vars	vars;
 
-// 	vars.mlx = mlx_init();
-// 	vars.win = mlx_new_window(vars.mlx, 1920, 1080, "Hello world!");
-// 	mlx_hook(vars.win, 2, 1L<<2, close, &vars);
-// 	mlx_loop(vars.mlx);
-// }
+ 	vars.mlx = mlx_init();
+ 	vars.win = mlx_new_window(vars.mlx, 1920, 1080, "Hello world!");
+ 	mlx_hook(vars.win, 2, 1L<<2, close, &vars);
+ 	mlx_loop(vars.mlx);
+ }
 
-
+*/
 
 
 
