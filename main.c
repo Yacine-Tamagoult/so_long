@@ -72,20 +72,18 @@ int main(int ac, char **av)
 		}
 	}
 	i = 0;
-	if(ft_check_master(tab))
-		return (1);
-	else
-	{
-		
+	// if(ft_check_master(tab))
+	// 	return (1);
+	
+	
 		ft_count(tab,&vars);
-		
 		vars.mlx = mlx_init();
 		vars.win = mlx_new_window(vars.mlx, vars.col * 50, vars.row * 50, "Many Corp");
 		init_image(&vars);
-		Print_image(tab);
+		zgag(&vars,tab);
 		mlx_key_hook(vars.win, key_hook, &vars);
 		mlx_loop(vars.mlx); 
-	}
+
 	return (0);
 }
 

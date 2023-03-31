@@ -40,7 +40,8 @@ int compteur();
 int	key_hook(int keycode, t_vars *vars);
 int ft_count(char **tab, t_vars *vars);
 void init_image(t_vars *vars);
-void Print_image(char **tab);
-
+void Print_image(t_vars *vars, char c,int x,int y);
+void	zgag(t_vars *vars, char **tab);
+int free_map(char **map);
 
 #endif

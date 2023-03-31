@@ -1,6 +1,18 @@
 #include "so_long.h"
 
+int free_map(char **map)
+{
+	int j;
 
+	j = 0;
+	while(map[j])
+	{
+		free(map[j]);
+		j++;
+	}
+	free(map);
+	return (1);
+}
 
 int ft_check_parasit(char **tab)
 {
@@ -102,7 +114,9 @@ int ft_valid_path(char **tab,int Y, int X, int Collect)
 		return(1);
 	}
 	
+	int j;
 
+	j = 0;
 	tab[Y][X] = 'V';
 	
 	int i = 0;
@@ -117,8 +131,8 @@ int ft_valid_path(char **tab,int Y, int X, int Collect)
 			{
 				if(c != Collect)
 					return(1);
+				// free_map(tab);
 				return(1);
-
 			}
 				
 		}
@@ -147,7 +161,7 @@ int ft_check_line(char **tab)
 		i++;
 	}
     return (0);
-}
+} 
 
 
 int ft_check_cpe(char **tab)
@@ -182,8 +196,8 @@ int ft_check_cpe(char **tab)
 	}
 	if(p != 1 && e != 1 && c < 1)
 		return(1);
-	if(ft_valid_path(tab,Y,X,c) == 0)
-		return (1);
+	// if(ft_valid_path(tab,Y,X,c) == 0)
+	// 	return (1);
 	return (0);
 }
 
@@ -213,7 +227,11 @@ int ft_check_master(char **map)
 	else if(ft_check_cpe(map))
 	{
 		printf("Error\n");
-		return (1);
+		return(free_map(map));
 	}
+	
 	return (0);
 }
+
+
+
