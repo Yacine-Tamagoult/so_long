@@ -22,12 +22,12 @@ char **ft_maps(char *str, char **tab)
 	int j = i - 1;
 	int k = 0; 
 
-	map = malloc(sizeof(char*) * i + 2);
-	map[i] = malloc(sizeof(char) * ftstrlen(str) + 1);
+	map = malloc(sizeof(char*) * (i + 2));
+	map[i] = malloc(sizeof(char) * (ftstrlen(str) + 1));
 	while(j >= 0)
 	{
 		k = 0;
-		map[j] = malloc(sizeof(char) * ftstrlen(tab[j]) + 1);
+		map[j] = malloc(sizeof(char) * (ftstrlen(tab[j]) + 1));
 		while(tab[j][k])
 		{
 			map[j][k] = tab[j][k];
@@ -72,8 +72,8 @@ int main(int ac, char **av)
 		}
 	}
 	i = 0;
-	// if(ft_check_master(tab))
-	// 	return (1);
+	if(ft_check_master(tab, &vars))
+		return (1);
 	
 	
 		ft_count(tab,&vars);

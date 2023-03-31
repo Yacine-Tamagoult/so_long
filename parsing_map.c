@@ -164,7 +164,7 @@ int ft_check_line(char **tab)
 } 
 
 
-int ft_check_cpe(char **tab)
+int ft_check_cpe(char **tab, t_vars *vars)
 {
 	int i = 0;
 	int j;
@@ -186,14 +186,21 @@ int ft_check_cpe(char **tab)
 				p++;
 				X = j;
 				Y = i;
+				vars->Perso_X = j * 50;
+				vars->Perso_Y = i * 50;
 			}
 			if(tab[i][j] == 'E')
+			{	
+				vars->Porte_X = j * 50;
+				vars->Porte_Y = i * 50;
 				e++;
+			}
 			j++;
 		}
 		j = 0;
 		i++;
 	}
+	vars->Count_Collect = c;
 	if(p != 1 && e != 1 && c < 1)
 		return(1);
 	// if(ft_valid_path(tab,Y,X,c) == 0)
@@ -202,8 +209,9 @@ int ft_check_cpe(char **tab)
 }
 
 
-int ft_check_master(char **map)
+int ft_check_master(char **map, t_vars *vars)
 {
+	
     if(ft_check_line(map))
 	{
 		printf("Error\n");
@@ -224,7 +232,7 @@ int ft_check_master(char **map)
 		printf("Error\n");
 		return (1);
 	}
-	else if(ft_check_cpe(map))
+	else if(ft_check_cpe(map,vars))
 	{
 		printf("Error\n");
 		return(free_map(map));

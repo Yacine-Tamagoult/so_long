@@ -23,6 +23,13 @@ typedef struct	s_vars {
     void	*flor;
     void	*door;
 	char	*addr;
+	int		Perso_X;
+	int		Perso_Y;
+	int		Porte_X;
+	int		Porte_Y;
+	int		img_width;
+	int		img_height;
+	int		Count_Collect;
     int     col;
     int     row;
 	int		bits_per_pixel;
@@ -32,8 +39,8 @@ typedef struct	s_vars {
 
 
 int ft_check_line(char **tab);
-int ft_check_cpe(char **tab);
-int ft_check_master(char **map);
+int ft_check_cpe(char **tab, t_vars *vars);
+int ft_check_master(char **map, t_vars *vars);
 int ftstrlen(char *str);
 char **ft_maps(char *str, char **tab);
 int compteur();

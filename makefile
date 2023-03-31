@@ -30,7 +30,6 @@ clean:
 	${RM} ${OBJ}
 
 fclean: clean
-	make clean -C minilibx-linux
 	make clean -C so_long
 	${RM} ${NAME} 
 
