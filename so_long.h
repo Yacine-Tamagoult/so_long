@@ -23,6 +23,9 @@ typedef struct	s_vars {
     void	*flor;
     void	*door;
 	char	*addr;
+	char	**map;
+	char	**Check_map;
+	char	next;
 	int		Perso_X;
 	int		Perso_Y;
 	int		Porte_X;
@@ -32,9 +35,7 @@ typedef struct	s_vars {
 	int		Count_Collect;
     int     col;
     int     row;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;	
+	int		step_count;
 }				t_vars;
 
 
@@ -48,7 +49,15 @@ int	key_hook(int keycode, t_vars *vars);
 int ft_count(char **tab, t_vars *vars);
 void init_image(t_vars *vars);
 void Print_image(t_vars *vars, char c,int x,int y);
-void	zgag(t_vars *vars, char **tab);
+void	zgag(t_vars *vars);
 int free_map(char **map);
+int Move_Down(t_vars *vars);
+int Move_Right(t_vars *vars);
+int Move_Left(t_vars *vars);
+int Move_Up(t_vars *vars);
+char **ft_copy_map(char **tab);
+char **ft_Fd_init(char *str);
+int ft_valid_path(char **tab,int Y, int X, int Collect, t_vars *vars);
+                               
 
-#endif
+#endif 

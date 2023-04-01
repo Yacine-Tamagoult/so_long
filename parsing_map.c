@@ -38,7 +38,6 @@ int ft_check_parasit(char **tab)
 	return (0);
 }
   
-
 int ft_check_square(char **tab)
 {
 	int i = 0;
@@ -57,7 +56,6 @@ int ft_check_square(char **tab)
 			return(1);
 		return (0);
 }
-
 
 int ft_check_wall(char **tab)
 {
@@ -96,9 +94,7 @@ int ft_check_wall(char **tab)
 	return (0);
 }
 
-
-
-int ft_valid_path(char **tab,int Y, int X, int Collect)
+int ft_valid_path(char **tab,int Y, int X, int Collect, t_vars *vars)
 {
 	int dx[] = {-1, 0, 1, 0};
 	int dy[] = {0, 1, 0, -1};
@@ -106,39 +102,25 @@ int ft_valid_path(char **tab,int Y, int X, int Collect)
 	
 	if(tab[Y][X] == 'C')
 		c++;
-	
-
-
-	if(tab[Y][X] == 'E')
-	{
+	if(tab[Y][X] == 'E' && c == vars->Count_Collect)
 		return(1);
-	}
-	
 	int j;
-
 	j = 0;
 	tab[Y][X] = 'V';
-	
 	int i = 0;
 	while(i < 4)
 	{
 		int NY = Y + dy[i];
 		int NX = X + dx[i];
-
 		if(tab[NY][NX] == '0' ||tab[NY][NX] == 'E' || tab[NY][NX] == 'C')
-		{
-			if(ft_valid_path(tab,NY,NX,Collect))
+			if(ft_valid_path(tab,NY,NX,Collect,vars))
 			{
 				if(c != Collect)
 					return(1);
-				// free_map(tab);
 				return(1);
 			}
-				
-		}
 		i++;
 	}
-	
 	return (0);
 }
 
@@ -201,41 +183,40 @@ int ft_check_cpe(char **tab, t_vars *vars)
 		i++;
 	}
 	vars->Count_Collect = c;
-	if(p != 1 && e != 1 && c < 1)
+	if(p != 1 || e != 1 || c != 1)
 		return(1);
-	// if(ft_valid_path(tab,Y,X,c) == 0)
-	// 	return (1);
+	else if(ft_valid_path(tab,Y,X,c,vars) == 0)
+	 	return (1);
 	return (0);
 }
 
 
 int ft_check_master(char **map, t_vars *vars)
 {
-	
     if(ft_check_line(map))
 	{
-		printf("Error\n");
+		printf("2\n");
 		return (1);
 	} 
 	else if(ft_check_parasit(map))
 	 {
-		printf("Error\n");
+		printf("3\n");
 		return (1);
 	 }
 	else if(ft_check_square(map))
 	{
-		printf("Error\n");
+		printf("4\n");
 		return(1);
 	}
 	else if(ft_check_wall(map))
 	{
-		printf("Error\n");
+		printf("5\n");
 		return (1);
 	}
 	else if(ft_check_cpe(map,vars))
 	{
-		printf("Error\n");
-		return(free_map(map));
+		printf("6\n");
+		return(1);
 	}
 	
 	return (0);

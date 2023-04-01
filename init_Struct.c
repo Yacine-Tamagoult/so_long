@@ -9,6 +9,8 @@ void init_image(t_vars *vars)
     vars->wall = mlx_xpm_file_to_image(vars->mlx,"image/mur.xpm",&vars->img_width, &vars->img_height);
     vars->flor = mlx_xpm_file_to_image(vars->mlx,"image/sol.xpm",&vars->img_width, &vars->img_height);
 	vars->door = mlx_xpm_file_to_image(vars->mlx,"image/Porte.xpm",&vars->img_width, &vars->img_height);
+	vars->collect = mlx_xpm_file_to_image(vars->mlx,"image/collect.xpm",&vars->img_width, &vars->img_height);
+
 }
 
 
@@ -41,9 +43,11 @@ void	Print_image(t_vars *vars, char c, int x, int y)
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->flor, x, y);
 	else if(c == 'E')
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->door, x, y);
+	else if(c == 'C')
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->collect, x, y);
 }
 
-void	zgag(t_vars *vars, char **tab)
+void	zgag(t_vars *vars)
 {
 	int	y;
 	int	x;
@@ -56,7 +60,7 @@ void	zgag(t_vars *vars, char **tab)
 	i = 0;
 	while (i < vars->row )
 	{
-		Print_image(vars, tab[i][j], x, y);
+		Print_image(vars, vars->map[i][j], x, y);
 		j++;
 		x += 50;
 		if (j == vars->col)
@@ -68,5 +72,6 @@ void	zgag(t_vars *vars, char **tab)
 		}
 	}
 }
+
 
 
