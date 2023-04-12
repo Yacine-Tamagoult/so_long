@@ -94,34 +94,183 @@ int ft_check_wall(char **tab)
 	return (0);
 }
 
-int ft_valid_path(char **tab,int Y, int X, int Collect, t_vars *vars)
+int ft_verif_c_et_e(char **tab)
 {
-	int dx[] = {-1, 0, 1, 0};
-	int dy[] = {0, 1, 0, -1};
-	static int c = 0;
-	
-	if(tab[Y][X] == 'C')
-		c++;
-	if(tab[Y][X] == 'E' && c == vars->Count_Collect)
-		return(1);
+	int i;
 	int j;
+
 	j = 0;
-	tab[Y][X] = 'V';
-	int i = 0;
-	while(i < 4)
+	while(tab[j])
 	{
-		int NY = Y + dy[i];
-		int NX = X + dx[i];
-		if(tab[NY][NX] == '0' ||tab[NY][NX] == 'E' || tab[NY][NX] == 'C')
-			if(ft_valid_path(tab,NY,NX,Collect,vars))
-			{
-				if(c != Collect)
-					return(1);
-				return(1);
-			}
-		i++;
+		i = 0;
+		while(tab[j][i])
+		{
+			if(tab[j][i] == 'C' || tab[j][i] == 'E')
+				return (1);
+			i++;
+		}
+		j++;
 	}
 	return (0);
+}
+
+// int ft_valid_path(char **tab,int Y, int X, int Collect, t_vars *vars)
+// {
+// 	int dx[] = {-1, 0, 1, 0};
+// 	int dy[] = {0, 1, 0, -1};
+// 	static int c = 0;
+	
+	
+// 	if(tab[Y][X] == 'C')
+// 		c++;
+// 	printf("colect : %d, c : %d\n", Collect, c);
+// 	if(tab[Y][X] == 'E' && c == vars->Count_Collect)
+// 		return(1);
+// 	if(tab[Y][X] != 'E')
+// 		tab[Y][X] = 'V';
+// 	int a = 0;
+// 	while(tab[a])
+// 	{
+// 		printf("%s\n", tab[a]);
+// 		a++;
+// 	}
+// 	printf("\n");
+// 	int i = 0;
+// 	while(i < 4)
+// 	{
+// 		int NY = Y + dy[i];
+// 		int NX = X + dx[i];
+// 		if(tab[NY][NX] == '0' || tab[NY][NX] == 'E' || tab[NY][NX] == 'C')
+// 		{
+// 			if(ft_valid_path(tab,NY,NX,Collect, vars))
+// 			{
+// 				printf("ilo\n");
+// 				return(1);
+// 			}
+// 		}
+// 		i++;
+// 	}
+// 	return (0);
+// }
+
+// int ft_valid_path(char **tab,int Y, int X, int Collect, t_vars *vars)
+// {
+// 	int dx[] = {-1, 0, 1, 0};
+// 	int dy[] = {0, 1, 0, -1};
+// 	static int c = 0;
+	
+	
+// 	if(tab[Y][X] == 'C')
+// 		c++;
+// 	printf("colect : %d, c : %d\n", Collect, c);
+// 	if(tab[Y][X] == 'E' && c == vars->Count_Collect)
+// 		return(1);
+// 	if(tab[Y][X] != 'P')
+// 	tab[Y][X] = 'V';
+// 	int a = 0;
+// 	while(tab[a])
+// 	{
+// 		printf("%s\n", tab[a]);
+// 		a++;
+// 	}
+// 	printf("\n");
+// 	int i = 0;
+// 	while(i < 4)
+// 	{
+// 		int NY = Y + dy[i];
+// 		int NX = X + dx[i];
+// 		if(tab[NY][NX] == '0' || (tab[NY][NX] == 'E' && c == vars->Count_Collect) || tab[NY][NX] == 'C')
+// 		{
+// 			if(ft_valid_path(tab,NY,NX,Collect, vars))
+// 			{
+// 				printf("ilo\n");
+// 				return(1);
+// 			}
+// 		}
+// 		i++;
+// 	}
+// 	return (0);
+// }
+
+
+int	ft_nombre_de_e_c(char **map, char c)
+{
+	int	j;
+	int	i;
+	int	compte;
+
+	j = 0;
+	compte = 0;
+	while (map[j])
+	{
+		i = 0;
+		while (map[j][i])
+		{
+			if (map[j][i] == c)
+				compte++;
+			i++;
+		}
+		j++;
+	}
+	return (compte);
+}
+
+int	verif_emplacement(char **fmap, char *map, int *e)
+{
+	if (*map == '0' || *map == 'C' || *map == 'E')
+	{
+		if (*map == 'E' && ft_nombre_de_e_c(fmap, 'C') != 0)
+		{
+			*e = *e + 1;
+			return 1;
+		}
+		if(*map == 'E')
+		{
+			*e = *e + 1;
+			*map = 'e';
+		}
+		if (*map == 'C')
+			*map = 'c';
+		if (*map == '0')
+			*map = '2';
+		return (0);
+	}
+	return (1);
+}
+
+int	ft_valid_path(char **map, int i, int j)
+{
+	static int	dr[4] = {0, 0, -1, 1};
+	static int	dc[4] = {1, -1, 0, 0};
+	int			i2;
+	int			j2;
+	static int e = 0;
+	int			o;
+	int a;
+
+	if (ft_nombre_de_e_c(map, 'E') != 0 || ft_nombre_de_e_c(map, 'C') != 0)
+	{
+		a= 0;
+		while(map[a])
+		{
+			printf("%s\n", map[a]);
+			a++;
+		}
+		printf("\n");
+		o = 0;
+		while (o < 4)
+		{
+			j2 = j + dr[o];
+			i2 = i + dc[o];
+			if (verif_emplacement(map, (&map[j2][i2]), &e) == 0)
+				ft_valid_path(map, i2, j2);
+			o++;
+		}
+	}
+	printf("e : %d\n", e);
+	if (e == 0 || ft_nombre_de_e_c(map, 'C') > 0)
+		return (0);
+	return (1);
 }
 
 int ft_check_line(char **tab)
@@ -185,7 +334,7 @@ int ft_check_cpe(char **tab, t_vars *vars)
 	vars->Count_Collect = c;
 	if(p != 1 || e != 1 || c != 1)
 		return(1);
-	else if(ft_valid_path(tab,Y,X,c,vars) == 0)
+	else if(ft_valid_path(tab,Y,X) == 0)
 	 	return (1);
 	return (0);
 }

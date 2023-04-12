@@ -57,7 +57,7 @@ int Move_Left(t_vars *vars);
 int Move_Up(t_vars *vars);
 char **ft_copy_map(char **tab);
 char **ft_Fd_init(char *str);
-int ft_valid_path(char **tab,int Y, int X, int Collect, t_vars *vars);
+int ft_valid_path(char **tab, int Y, int X);
                                
 
 #endif 

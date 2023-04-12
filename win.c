@@ -2,6 +2,7 @@
 
 int	key_hook(int keycode, t_vars *vars)
 {
+	printf("%c\n", keycode);
 	if (keycode == 'a')
 		vars->next = vars->map[(vars->Perso_Y / 50)][(vars->Perso_X / 50) - 1];
 	else if (keycode == 's')
