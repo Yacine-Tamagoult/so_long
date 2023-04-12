@@ -58,6 +58,8 @@ int Move_Up(t_vars *vars);
 char **ft_copy_map(char **tab);
 char **ft_Fd_init(char *str);
 int ft_valid_path(char **tab, int Y, int X);
+
+//moi Yacine je tiens a remercier Ilona car elle m'a tout appris, a debugger mon code et en plus elle est trop belle vraiment merci ilona <3
                                
 
 #endif 
