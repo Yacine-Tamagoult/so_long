@@ -75,6 +75,27 @@ char **ft_maps(char *str, char **tab)
 	return(map);
 }
 
+int ft_check_ber(char *file)
+{
+	char ber []=".ber";
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	while(file[i])
+	{
+		if(file[i] == ber[i])
+		{
+			j++;
+		}
+		i++;
+	}
+	if(!ber[j])
+		return 0;
+	return 1;
+}
+
 char **ft_Fd_init(char *file)
 {	
 	int i = 0;
@@ -104,8 +125,14 @@ int main(int ac, char **av)
 	int k = 0;
 	vars.map = ft_copy_map(ft_Fd_init(av[1]));
 	vars.Check_map = ft_copy_map(vars.map);
+	if(ft_check_ber(av[1]))
+	{
+		printf("Error");
+		return (1);
+	}
 	if(ft_check_master(vars.Check_map, &vars))
 		return (1);
+	
 	ft_count(vars.Check_map,&vars);
 	vars.mlx = mlx_init();
 	vars.win = mlx_new_window(vars.mlx, vars.col * 50, vars.row * 50, "Many Corp");

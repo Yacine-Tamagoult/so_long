@@ -191,8 +191,6 @@ int ft_verif_c_et_e(char **tab)
 // 	}
 // 	return (0);
 // }
-
-
 int	ft_nombre_de_e_c(char **map, char c)
 {
 	int	j;
@@ -215,28 +213,39 @@ int	ft_nombre_de_e_c(char **map, char c)
 	return (compte);
 }
 
-int	verif_emplacement(char **fmap, char *map, int *e)
+int is_valid_position(char **map, int i, int j)
 {
-	if (*map == '0' || *map == 'C' || *map == 'E')
-	{
-		if (*map == 'E' && ft_nombre_de_e_c(fmap, 'C') != 0)
-		{
-			*e = *e + 1;
-			return 1;
-		}
-		if(*map == 'E')
-		{
-			*e = *e + 1;
-			*map = 'e';
-		}
-		if (*map == 'C')
-			*map = 'c';
-		if (*map == '0')
-			*map = '2';
-		return (0);
-	}
-	return (1);
+ 	if (j >= 0 && map[j] && i >= 0 && map[j][i])
+		return (1);
+	return (0);
 }
+
+int verif_emplacement(char **fmap, char *map, int *e, int i, int j)
+{
+    if (!is_valid_position(fmap, i, j))
+        return (1);
+
+    if (*map == '0' || *map == 'C' || *map == 'E')
+    {
+        if (*map == 'E' && ft_nombre_de_e_c(fmap, 'C') != 0)
+        {
+            *e = *e + 1;
+            return 1;
+        }
+        if (*map == 'E')
+        {
+            *e = *e + 1;
+            *map = 'e';
+        }
+        if (*map == 'C')
+            *map = 'c';
+        if (*map == '0')
+            *map = '2';
+        return (0);
+    }
+    return (1);
+}
+
 
 int	ft_valid_path(char **map, int i, int j)
 {
@@ -262,7 +271,7 @@ int	ft_valid_path(char **map, int i, int j)
 		{
 			j2 = j + dr[o];
 			i2 = i + dc[o];
-			if (verif_emplacement(map, (&map[j2][i2]), &e) == 0)
+			if (verif_emplacement(map, (&map[j2][i2]), &e, i2, j2) == 0)
 				ft_valid_path(map, i2, j2);
 			o++;
 		}
