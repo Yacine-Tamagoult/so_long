@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   win.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: soleil <soleil@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/15 22:30:45 by soleil            #+#    #+#             */
+/*   Updated: 2023/04/15 22:42:00 by soleil           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 int	key_hook(int keycode, t_vars *vars)
 {
-	printf("%c\n", keycode);
+	printf ("%c\n", keycode);
 	if (keycode == 'a')
 		vars->next = vars->map[(vars->Perso_Y / 50)][(vars->Perso_X / 50) - 1];
 	else if (keycode == 's')
@@ -19,90 +31,103 @@ int	key_hook(int keycode, t_vars *vars)
 	if (vars->next != '1' && (vars->Count_Collect == 0 || vars->next != 'E'))
 	{
 		if (keycode == 'a')
-			Move_Up(vars);
+			move_up(vars);
 		if (keycode == 's')
-			Move_Down(vars);
+			move_down(vars);
 		if (keycode == 'w')
-			Move_Left(vars);
+			move_left(vars);
 		if (keycode == 'd')
-			Move_Right(vars);
+			move_right(vars);
 	}
 	return (0);
 }
 
-int	Move_Up(t_vars *vars)
+int	move_up(t_vars *vars)
 {
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->flor, vars->Perso_X,vars->Perso_Y);
-	mlx_destroy_image(vars->mlx, vars->perso);
-	vars->perso = mlx_xpm_file_to_image(vars->mlx,"image/moi.xpm", &vars->img_width,&vars->img_height);
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->perso, vars->Perso_X - 50, vars->Perso_Y);
+	mlx_put_image_to_window (vars->mlx, vars->win, vars->flor,
+		vars->Perso_X, vars->Perso_Y);
+	mlx_destroy_image (vars->mlx, vars->perso);
+	vars->perso = mlx_xpm_file_to_image (vars->mlx, "image/moi.xpm",
+			&vars->img_width, &vars->img_height);
+	mlx_put_image_to_window (vars->mlx, vars->win, vars->perso,
+		vars->Perso_X - 50, vars->Perso_Y);
 	vars->Perso_X = vars->Perso_X - 50;
-	if(vars->map[vars->Perso_Y / 50][vars->Perso_X / 50] == 'C')
+	if (vars->map[vars->Perso_Y / 50][vars->Perso_X / 50] == 'C')
 	{	
 		vars->map[vars->Perso_Y / 50][vars->Perso_X / 50] = '0';
 		vars->Count_Collect--;
 	}
-	if(vars->Perso_X == vars->Porte_X && vars->Perso_Y == vars->Porte_Y && vars->Count_Collect == 0)
+	if (vars->Perso_X == vars->Porte_X && vars->Perso_Y == vars->Porte_Y
+		&& vars->Count_Collect == 0)
 	{
 		mlx_destroy_window(vars->mlx, vars->win);
 		exit(EXIT_SUCCESS);
 	}
 }
 
-int Move_Down(t_vars *vars)
+int	move_down(t_vars *vars)
 {
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->flor, vars->Perso_X, vars->Perso_Y);
-	mlx_destroy_image(vars->mlx, vars->perso);
-	vars->perso = mlx_xpm_file_to_image(vars->mlx,"image/moi.xpm", &vars->img_width,&vars->img_height);
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->perso, vars->Perso_X, vars->Perso_Y + 50);
-	vars->Perso_Y = vars->Perso_Y  + 50;
-	if(vars->map[vars->Perso_Y / 50][vars->Perso_X / 50] == 'C')
+	mlx_put_image_to_window (vars->mlx, vars->win, vars->flor,
+		vars->Perso_X, vars->Perso_Y);
+	mlx_destroy_image (vars->mlx, vars->perso);
+	vars->perso = mlx_xpm_file_to_image (vars->mlx, "image/moi.xpm",
+			&vars->img_width, &vars->img_height);
+	mlx_put_image_to_window (vars->mlx, vars->win, vars->perso,
+		vars->Perso_X, vars->Perso_Y + 50);
+	vars->Perso_Y = vars->Perso_Y + 50;
+	if (vars->map[vars->Perso_Y / 50][vars->Perso_X / 50] == 'C')
 	{
 		vars->map[vars->Perso_Y / 50][vars->Perso_X / 50] = '0';
 		vars->Count_Collect--;
 	}
-	if(vars->Perso_X == vars->Porte_X && vars->Perso_Y == vars->Porte_Y && vars->Count_Collect == 0)
+	if (vars->Perso_X == vars->Porte_X && vars->Perso_Y == vars->Porte_Y
+		&& vars->Count_Collect == 0)
 	{
 		mlx_destroy_window(vars->mlx, vars->win);
 		exit(EXIT_SUCCESS);
 	}
 }
 
-int Move_Right(t_vars *vars)
+int	move_right(t_vars *vars)
 {
-	
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->flor, vars->Perso_X, vars->Perso_Y);
-	mlx_destroy_image(vars->mlx, vars->perso);
-	vars->perso = mlx_xpm_file_to_image(vars->mlx,"image/moi.xpm", &vars->img_width,&vars->img_height);
-
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->perso, vars->Perso_X + 50, vars->Perso_Y);
+	mlx_put_image_to_window (vars->mlx, vars->win, vars->flor,
+		vars->Perso_X, vars->Perso_Y);
+	mlx_destroy_image (vars->mlx, vars->perso);
+	vars->perso = mlx_xpm_file_to_image(vars->mlx, "image/moi.xpm",
+			&vars->img_width, &vars->img_height);
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->perso,
+		vars->Perso_X + 50, vars->Perso_Y);
 	vars->Perso_X = vars->Perso_X + 50;
-	if(vars->map[vars->Perso_Y / 50][vars->Perso_X / 50] == 'C')
+	if (vars->map[vars->Perso_Y / 50][vars->Perso_X / 50] == 'C')
 	{
 		vars->map[vars->Perso_Y / 50][vars->Perso_X / 50] = '0';
 		vars->Count_Collect--;
 	}
-	if(vars->Perso_X == vars->Porte_X && vars->Perso_Y == vars->Porte_Y && vars->Count_Collect == 0)
+	if (vars->Perso_X == vars->Porte_X && vars->Perso_Y == vars->Porte_Y
+		&& vars->Count_Collect == 0)
 	{
 		mlx_destroy_window(vars->mlx, vars->win);
 		exit(EXIT_SUCCESS);
 	}
 }
 
-int Move_Left(t_vars *vars)
+int	move_left(t_vars *vars)
 {
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->flor, vars->Perso_X, vars->Perso_Y);
-	mlx_destroy_image(vars->mlx, vars->perso);
-	vars->perso = mlx_xpm_file_to_image(vars->mlx,"image/moi.xpm", &vars->img_width,&vars->img_height);
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->perso, vars->Perso_X , vars->Perso_Y - 50);
-	vars->Perso_Y = vars->Perso_Y  - 50;
-	
-	if(vars->map[vars->Perso_Y / 50][vars->Perso_X / 50] == 'C')
+	mlx_put_image_to_window (vars->mlx, vars->win, vars->flor,
+		vars->Perso_X, vars->Perso_Y);
+	mlx_destroy_image (vars->mlx, vars->perso);
+	vars->perso = mlx_xpm_file_to_image (vars->mlx, "image/moi.xpm",
+			&vars->img_width, &vars->img_height);
+	mlx_put_image_to_window (vars->mlx, vars->win, vars->perso,
+		vars->Perso_X, vars->Perso_Y - 50);
+	vars->Perso_Y = vars->Perso_Y - 50;
+	if (vars->map[vars->Perso_Y / 50][vars->Perso_X / 50] == 'C')
 	{
 		vars->map[vars->Perso_Y / 50][vars->Perso_X / 50] = '0';
 		vars->Count_Collect--;
 	}
-	if(vars->Perso_X == vars->Porte_X && vars->Perso_Y == vars->Porte_Y && vars->Count_Collect == 0)
+	if (vars->Perso_X == vars->Porte_X && vars->Perso_Y == vars->Porte_Y
+		&& vars->Count_Collect == 0)
 	{
 		mlx_destroy_window(vars->mlx, vars->win);
 		exit(EXIT_SUCCESS);

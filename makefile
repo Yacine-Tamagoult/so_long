@@ -6,10 +6,13 @@ NAME = so_long
 
 SRCS = 	main.c\
 		win.c \
+		parsing_map_2.c \
+		parsing_map_3.c \
+		parsing_map.c \
 		mayalabeille/get_next_line.c \
 		mayalabeille/get_next_line_utils.c \
-		parsing_map.c \
 		init_Struct.c \
+		
 
 
 OBJ	= ${SRCS:.c=.o}

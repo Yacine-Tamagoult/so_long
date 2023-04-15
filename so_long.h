@@ -23,6 +23,7 @@ typedef struct	s_vars {
     void	*flor;
     void	*door;
 	char	*addr;
+	char	pos[2];
 	char	**map;
 	char	**Check_map;
 	char	next;
@@ -36,8 +37,10 @@ typedef struct	s_vars {
     int     col;
     int     row;
 	int		step_count;
+	int		x;
+	int		y;
+	int		o;
 }				t_vars;
-
 
 int ft_check_line(char **tab);
 int ft_check_cpe(char **tab, t_vars *vars);
@@ -48,17 +51,18 @@ int compteur();
 int	key_hook(int keycode, t_vars *vars);
 int ft_count(char **tab, t_vars *vars);
 void init_image(t_vars *vars);
-void Print_image(t_vars *vars, char c,int x,int y);
+void print_image(t_vars *vars, char c,int x,int y);
 void	zgag(t_vars *vars);
 int free_map(char **map);
-int Move_Down(t_vars *vars);
-int Move_Right(t_vars *vars);
-int Move_Left(t_vars *vars);
-int Move_Up(t_vars *vars);
+int move_down(t_vars *vars);
+int move_right(t_vars *vars);
+int move_left(t_vars *vars);
+int move_up(t_vars *vars);
 char **ft_copy_map(char **tab);
-char **ft_Fd_init(char *str);
-int ft_valid_path(char **tab, int Y, int X);
+char **ft_fd_init(char *str);
+int	ft_valid_path(char **map, int i, int j, t_vars *vars);
 int ft_check_ber(char *file);
+int	ft_check_horizontal(char **tab, int i, int k);
 
 //moi Yacine je tiens a remercier Ilona car elle m'a tout appris, a debugger mon code et en plus elle est trop belle vraiment merci ilona <3
                                
