@@ -6,7 +6,7 @@
 /*   By: soleil <soleil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 21:56:35 by soleil            #+#    #+#             */
-/*   Updated: 2023/04/17 22:38:44 by soleil           ###   ########.fr       */
+/*   Updated: 2023/04/17 23:01:56 by soleil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,13 +120,11 @@ int	main(int ac, char **av)
 
 	k = 0;
 	j = 0;
+	memset(&vars,0,sizeof(vars));
 	vars.map = ft_copy_map (ft_fd_init(av[1]));
 	vars.check_map = ft_copy_map (vars.map);
 	if (ft_check_ber(av[1]))
-	{
-		printf ("Error");
-		return (1);
-	}
+		return (printf ("Error"), 1);
 	if (ft_check_master(vars.check_map, &vars))
 		return (1);
 	ft_count (vars.check_map, &vars);

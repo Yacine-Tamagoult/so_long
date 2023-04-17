@@ -6,7 +6,7 @@
 /*   By: soleil <soleil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 22:09:17 by soleil            #+#    #+#             */
-/*   Updated: 2023/04/17 22:17:58 by soleil           ###   ########.fr       */
+/*   Updated: 2023/04/17 22:45:04 by soleil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ int	ft_check_parasit(char **tab)
 
 	i = 0;
 	searchpara = 0;
-	printf("je suis para : %d\n", searchpara);
 	while (tab[i])
 	{
 		j = 0;
