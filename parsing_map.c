@@ -6,7 +6,7 @@
 /*   By: soleil <soleil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 22:09:17 by soleil            #+#    #+#             */
-/*   Updated: 2023/04/15 23:28:38 by soleil           ###   ########.fr       */
+/*   Updated: 2023/04/17 22:17:58 by soleil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int	ft_check_parasit(char **tab)
 
 	i = 0;
 	searchpara = 0;
+	printf("je suis para : %d\n", searchpara);
 	while (tab[i])
 	{
 		j = 0;
@@ -79,27 +80,19 @@ int	ft_check_parasit(char **tab)
 		}
 		i++;
 	}
-	if (searchpara != 0)
+	if (searchpara > 0)
 		return (1);
 	return (0);
 }
 
-int	ft_check_square(char **tab)
+int	ftstrlen(char *str)
 {
 	int	i;
-	int	j;
 
 	i = 0;
-	while (tab[i])
-	{
-		j = 0;
-		while (tab[i][j])
-			j++;
+	while (str[i])
 		i++;
-	}
-	if (i == j)
-		return (1);
-	return (0);
+	return (i);
 }
 
 int	ft_check_master(char **map, t_vars *vars)
@@ -110,8 +103,6 @@ int	ft_check_master(char **map, t_vars *vars)
 		return (printf ("3\n"), 1);
 	else if (ft_check_parasit(map))
 		return (printf ("4\n"), 1);
-	else if (ft_check_square(map))
-		return (printf ("5\n"), 1);
 	else if (ft_check_cpe(map, vars))
 		return (printf ("6\n"), 1);
 	return (0);

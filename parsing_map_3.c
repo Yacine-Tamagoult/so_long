@@ -6,7 +6,7 @@
 /*   By: soleil <soleil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 23:06:21 by soleil            #+#    #+#             */
-/*   Updated: 2023/04/15 23:37:24 by soleil           ###   ########.fr       */
+/*   Updated: 2023/04/17 22:37:21 by soleil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	ft_check_horizontal(char **tab, int i, int k)
 {
 	int	topnbot;
 
-	topnbot = 1;
+	topnbot = 0;
 	while (topnbot < k)
 	{
 		if (tab[i][topnbot] != '1')
@@ -40,48 +40,50 @@ int	ft_check_horizontal(char **tab, int i, int k)
 	return (0);
 }
 
+void	count_characters(char **tab, t_vars *vars, int counts[3])
+{
+	while (tab[vars->counti])
+	{
+		vars->countj = 0;
+		while (tab[vars->counti][vars->countj])
+		{
+			if (tab[vars->counti][vars->countj] == 'C')
+				counts[0]++;
+			if (tab[vars->counti][vars->countj] == 'P')
+			{
+				counts[1]++;
+				vars->x = vars->countj;
+				vars->y = vars->counti;
+				vars->perso_x = vars->countj * 50;
+				vars->perso_y = vars->counti * 50;
+			}
+			if (tab[vars->counti][vars->countj] == 'E')
+			{
+					vars->porte_x = vars->countj * 50;
+					vars->porte_y = vars->counti * 50;
+					counts[2]++;
+			}
+			vars->countj++;
+		}
+		vars->counti++;
+	}
+}
+
 int	ft_check_cpe(char **tab, t_vars *vars)
 {
-	int	i;
-	int	j;
-	int	c;
-	int	p;
-	int	e;
+	static int	counts[3] = {0, 0, 0};
 
-	i = 0;
-	c = 0;
-	p = 0;
-	e = 0;
-	while (tab[i])
-	{
-		j = 0;
-		while (tab[i][j])
-		{
-			if (tab[i][j] == 'C')
-				c++;
-			if (tab[i][j] == 'P')
-			{
-				p++;
-				vars->x = j;
-				vars->y = i;
-				vars->Perso_X = j * 50;
-				vars->Perso_Y = i * 50;
-			}
-			if (tab[i][j] == 'E')
-			{	
-				vars->Porte_X = j * 50;
-				vars->Porte_Y = i * 50;
-				e++;
-			}
-			j++;
-		}
-		j = 0;
-		i++;
-	}
-	vars->Count_Collect = c;
-	if (p != 1 || e != 1 || c != 1)
+	count_characters(tab, vars, counts);
+	vars->count_collect = counts[0];
+	if (counts[1] != 1 || counts[2] != 1 || counts[0] < 1)
 		return (1);
 	else if (ft_valid_path(tab, vars->y, vars->x, vars) == 0)
 		return (1);
 	return (0);
+}
+
+int	escape(int key, t_vars *vars)
+{
+	mlx_destroy_window(vars->mlx, vars->win);
+	exit (0);
 }

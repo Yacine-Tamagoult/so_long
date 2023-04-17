@@ -6,21 +6,11 @@
 /*   By: soleil <soleil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 21:56:35 by soleil            #+#    #+#             */
-/*   Updated: 2023/04/16 00:43:58 by soleil           ###   ########.fr       */
+/*   Updated: 2023/04/17 22:38:44 by soleil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-int	ftstrlen(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
 
 char	**ft_copy_map(char **tab)
 {
@@ -41,13 +31,9 @@ char	**ft_copy_map(char **tab)
 		copy[j] = strdup(tab[j]);
 		if (!copy[j])
 		{
-			while (j > 0)
-			{
-				j--;
+			while (j-- > 0)
 				free(copy[j]);
-			}
-			free (copy);
-			return (NULL);
+			return (free(copy), NULL);
 		}
 		j++;
 	}
@@ -70,19 +56,13 @@ char	**ft_maps(char *str, char **tab)
 		k = 0;
 		map[j] = malloc(sizeof(char) * (ftstrlen(tab[j]) + 1));
 		while (tab[j][k])
-		{
-			map[j][k] = tab[j][k];
-			k++;
-		}
+			map[j][k++] = tab[j][k];
 		map[j][k] = 0;
 		j--;
 	}
 	k = 0;
 	while (str[k])
-	{
-		map[i][k] = str[k];
-		k++;
-	}
+		map[i][k++] = str[k];
 	map[i][k] = 0;
 	map[i + 1] = NULL;
 	i++;
@@ -141,15 +121,15 @@ int	main(int ac, char **av)
 	k = 0;
 	j = 0;
 	vars.map = ft_copy_map (ft_fd_init(av[1]));
-	vars.Check_map = ft_copy_map (vars.map);
+	vars.check_map = ft_copy_map (vars.map);
 	if (ft_check_ber(av[1]))
 	{
 		printf ("Error");
 		return (1);
 	}
-	if (ft_check_master(vars.Check_map, &vars))
+	if (ft_check_master(vars.check_map, &vars))
 		return (1);
-	ft_count (vars.Check_map, &vars);
+	ft_count (vars.check_map, &vars);
 	vars.mlx = mlx_init ();
 	vars.win = mlx_new_window (vars.mlx, vars.col * 50,
 			vars.row * 50, "Many Corp");

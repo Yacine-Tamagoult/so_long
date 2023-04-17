@@ -33,7 +33,6 @@ clean:
 	${RM} ${OBJ}
 
 fclean: clean
-	make clean -C so_long
 	${RM} ${NAME} 
 
 re: fclean all

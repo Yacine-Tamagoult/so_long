@@ -6,7 +6,7 @@
 /*   By: soleil <soleil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 23:10:40 by soleil            #+#    #+#             */
-/*   Updated: 2023/04/16 00:45:46 by soleil           ###   ########.fr       */
+/*   Updated: 2023/04/16 13:47:46 by soleil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,11 @@ int	is_valid_position(char **map, int i, int j)
 
 int	verif_emplacement(char **fmap, char *map, int *e, char *pos)
 {
-	int i;
-	int j;
-	
-	i = pos[0];
-	j = pos[1];
-	if (!is_valid_position(fmap, i, j))
+	t_vars	vars;
+
+	vars.i = pos[0];
+	vars.j = pos[1];
+	if (!is_valid_position(fmap, vars.i, vars.j))
 		return (1);
 	if (*map == '0' || *map == 'C' || *map == 'E')
 	{
@@ -93,31 +92,28 @@ int	verif_emplacement(char **fmap, char *map, int *e, char *pos)
 
 int	ft_valid_path(char **map, int i, int j, t_vars *vars)
 {
-	static int	dr[4] = {0, 0, -1, 1};
-	static int	dc[4] = {1, -1, 0, 0};
+	static int	dr[8] = {0, 0, -1, 1, 1, -1, 0, 0};
 	int			i2;
 	int			j2;
 	static int	e = 0;
+	int			o;
 
+	o = 0;
 	if (ft_nombre_de_e_c(map, 'E') != 0 || ft_nombre_de_e_c(map, 'C') != 0)
 	{
-		while (vars->o < 4)
+		while (o < 4)
 		{
-			j2 = j + dr[vars->o];
-			i2 = i + dc[vars->o];
+			j2 = j + dr[o];
+			i2 = i + dr[o + 4];
 			vars->pos[0] = i2;
 			vars->pos[1] = j2;
-
-			if (is_valid_position(map, i2, j2) && verif_emplacement(map, &map[j2][i2], &e, vars->pos) == 0)
-			{
+			if (is_valid_position(map, i2, j2)
+				&& verif_emplacement(map, &map[j2][i2], &e, vars->pos) == 0)
 				ft_valid_path(map, i2, j2, vars);
-			}
-			vars->o++;
+			o++;
 		}
 	}
 	if (e == 0 || ft_nombre_de_e_c(map, 'C') > 0)
 		return (0);
 	return (1);
 }
-
-
