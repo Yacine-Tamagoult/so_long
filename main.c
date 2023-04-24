@@ -6,7 +6,7 @@
 /*   By: soleil <soleil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 21:56:35 by soleil            #+#    #+#             */
-/*   Updated: 2023/04/24 17:11:40 by soleil           ###   ########.fr       */
+/*   Updated: 2023/04/24 17:55:49 by soleil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ char	**ft_copy_map(char **tab)
 	char	**copy;
 
 	i = 0;
+	if(!tab)
+		return (NULL);
 	while (tab[i])
 		i++;
 	copy = (char **)malloc((i + 1) * sizeof(char *));
@@ -104,11 +106,6 @@ char	**ft_fd_init(char *file)
 	{
 		
 		str = get_next_line(fd);
-		if(!str)
-		{
-			free (str);
-			return (NULL);
-		}
 		while (str)
 		{
 			tab = ft_maps(str, tab);
@@ -132,9 +129,6 @@ int	main(int ac, char **av)
 		return (1);
 	if (ft_check_ber(av[1]))
 		return (printf ("Error\n"), 1);
-	if(ft_fd_init(av[1]) == NULL)
-		return (1);
-	
 	memset(&vars,0,sizeof(vars));
 	vars.map = ft_copy_map (ft_fd_init(av[1]));
 	if(!vars.map)
