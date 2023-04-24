@@ -4,6 +4,12 @@ trucs a modifier/pas oublier :
 - utilise ft_printf au lieu de printf normal
 - si la map est vide il y a un segfault
 - free le char **tab lorsque tu cree la map dans la fonction "ft_maps"
-- protege la creation de tes images avec des if (actuellement si on modifie le nom d'une image il y a un probleme d'affichage puis ca segfault)
-- il faut que lorsque l'on quitte le jeu (soit en faisant exit soit en gagnant)
-- on doit pouvoir fermer la fenetre avec la croix (fonciton mlx_hook(vars->win, 17, 1L << 17, [nom de ta fonction qui va tout free puis exit], [nom de ta structure]))
+- protege la creation de tes images avec des if (actuellement si on modifie le nom d'une image il y a un probleme d'affichage puis ca segfault)- on doit pouvoir fermer la fenetre avec la croix (fonciton mlx_hook(vars->win, 17, 1L << 17, [nom de ta fonction qui va tout free puis exit], [nom de ta structure]))
+- il faut que lorsque l'on quitte le jeu (soit en faisant exit/croix soit en gagnant) tout soit free avec eles fonctions :
+    - mlx_destroy_image(vars->mlx, vars->exit) (avec chacune de tes images)
+    - mlx_destroy_window(vars->mlx, vars->win)
+    - mlx_destroy_display(vars->mlx);
+    - free ta map
+    - free ton pointeur sur la mlx
+    (dans cet ordre)
+- 
