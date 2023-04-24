@@ -6,7 +6,7 @@
 /*   By: soleil <soleil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 22:31:20 by soleil            #+#    #+#             */
-/*   Updated: 2023/04/17 22:39:13 by soleil           ###   ########.fr       */
+/*   Updated: 2023/04/24 16:50:51 by soleil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ char	**ft_maps(char *str, char **tab);
 int		compteur(void);
 int		key_hook(int keycode, t_vars *vars);
 int		ft_count(char **tab, t_vars *vars);
-void	init_image(t_vars *vars);
+int	init_image(t_vars *vars);
 void	print_image(t_vars *vars, char c, int x, int y);
 void	zgag(t_vars *vars);
 int		free_map(char **map);

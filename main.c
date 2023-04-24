@@ -6,7 +6,7 @@
 /*   By: soleil <soleil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 21:56:35 by soleil            #+#    #+#             */
-/*   Updated: 2023/04/17 23:01:56 by soleil           ###   ########.fr       */
+/*   Updated: 2023/04/24 17:11:40 by soleil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,9 @@ int	ft_check_ber(char *file)
 		i++;
 	}
 	if (!ber[j])
+	{
 		return (0);
+	}
 	return (1);
 }
 
@@ -100,7 +102,13 @@ char	**ft_fd_init(char *file)
 	fd = open(file, O_RDONLY);
 	if (fd >= 0)
 	{
+		
 		str = get_next_line(fd);
+		if(!str)
+		{
+			free (str);
+			return (NULL);
+		}
 		while (str)
 		{
 			tab = ft_maps(str, tab);
@@ -109,7 +117,7 @@ char	**ft_fd_init(char *file)
 			str = get_next_line(fd);
 		}
 	}
-	return (tab);
+	return (tab);	
 }
 
 int	main(int ac, char **av)
@@ -120,11 +128,18 @@ int	main(int ac, char **av)
 
 	k = 0;
 	j = 0;
+	if	(ac != 2)
+		return (1);
+	if (ft_check_ber(av[1]))
+		return (printf ("Error\n"), 1);
+	if(ft_fd_init(av[1]) == NULL)
+		return (1);
+	
 	memset(&vars,0,sizeof(vars));
 	vars.map = ft_copy_map (ft_fd_init(av[1]));
+	if(!vars.map)
+		return(printf("error"), 1);
 	vars.check_map = ft_copy_map (vars.map);
-	if (ft_check_ber(av[1]))
-		return (printf ("Error"), 1);
 	if (ft_check_master(vars.check_map, &vars))
 		return (1);
 	ft_count (vars.check_map, &vars);

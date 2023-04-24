@@ -6,13 +6,13 @@
 /*   By: soleil <soleil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 21:55:53 by soleil            #+#    #+#             */
-/*   Updated: 2023/04/15 21:55:55 by soleil           ###   ########.fr       */
+/*   Updated: 2023/04/24 16:50:39 by soleil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	init_image(t_vars *vars)
+int	init_image(t_vars *vars)
 {
 	vars->img_width = 5;
 	vars ->img_height = 5;
@@ -26,6 +26,10 @@ void	init_image(t_vars *vars)
 			&vars->img_width, &vars->img_height);
 	vars->collect = mlx_xpm_file_to_image(vars->mlx, "image/collect.xpm",
 			&vars->img_width, &vars->img_height);
+	if(!vars->perso || !vars->wall || !vars->flor || !vars->door || !vars->collect)
+	{
+		return (1);
+	}
 }
 
 int	ft_count(char **tab, t_vars *vars)
