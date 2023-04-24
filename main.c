@@ -6,7 +6,7 @@
 /*   By: soleil <soleil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 21:56:35 by soleil            #+#    #+#             */
-/*   Updated: 2023/04/24 17:55:49 by soleil           ###   ########.fr       */
+/*   Updated: 2023/04/24 19:15:05 by soleil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,17 +102,15 @@ char	**ft_fd_init(char *file)
 
 	i = 0;
 	fd = open(file, O_RDONLY);
-	if (fd >= 0)
+	str = get_next_line(fd);
+	if(!str)
+		return (NULL);
+	while (str)
 	{
-		
+		tab = ft_maps(str, tab);
+		i++;
+		free(str);
 		str = get_next_line(fd);
-		while (str)
-		{
-			tab = ft_maps(str, tab);
-			i++;
-			free(str);
-			str = get_next_line(fd);
-		}
 	}
 	return (tab);	
 }
