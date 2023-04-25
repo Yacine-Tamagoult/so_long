@@ -6,7 +6,7 @@
 /*   By: soleil <soleil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 22:30:45 by soleil            #+#    #+#             */
-/*   Updated: 2023/04/25 16:16:02 by soleil           ###   ########.fr       */
+/*   Updated: 2023/04/25 19:01:46 by soleil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ int	move_up(t_vars *vars)
 	if (vars->perso_x == vars->porte_x && vars->perso_y == vars->porte_y
 		&& vars->count_collect == 0)
 	{
-		mlx_destroy_window(vars->mlx, vars->win);
 		freetoutmescopains(vars);
 		exit(EXIT_SUCCESS);
 	}
@@ -99,7 +98,6 @@ int	move_down(t_vars *vars)
 	if (vars->perso_x == vars->porte_x && vars->perso_y == vars->porte_y
 		&& vars->count_collect == 0)
 	{
-		mlx_destroy_window(vars->mlx, vars->win);
 		freetoutmescopains(vars);
 		exit(EXIT_SUCCESS);
 	}
@@ -123,7 +121,6 @@ int	move_right(t_vars *vars)
 	if (vars->perso_x == vars->porte_x && vars->perso_y == vars->porte_y
 		&& vars->count_collect == 0)
 	{
-		mlx_destroy_window(vars->mlx, vars->win);
 		freetoutmescopains(vars);
 		exit(EXIT_SUCCESS);
 	}
@@ -147,7 +144,6 @@ int	move_left(t_vars *vars)
 	if (vars->perso_x == vars->porte_x && vars->perso_y == vars->porte_y
 		&& vars->count_collect == 0)
 	{
-		mlx_destroy_window(vars->mlx, vars->win);
 		freetoutmescopains(vars);
 		exit(EXIT_SUCCESS);
 	}
