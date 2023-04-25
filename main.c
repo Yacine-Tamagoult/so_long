@@ -6,7 +6,7 @@
 /*   By: soleil <soleil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 21:56:35 by soleil            #+#    #+#             */
-/*   Updated: 2023/04/25 16:19:56 by soleil           ###   ########.fr       */
+/*   Updated: 2023/04/25 16:36:06 by soleil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,32 +116,37 @@ char	**ft_fd_init(char *file)
 	return (tab);	
 }
 
-int	main(int ac, char **av)
-{	
-	t_vars	vars;
-	int		j;
-	int		k;
+int main(int ac, char **av)
+{
+    t_vars vars;
+    int j;
+    int k;
 
-	k = 0;
-	j = 0;
-	if	(ac != 2)
-		return (1);
-	if (ft_check_ber(av[1]))
-		return (printf ("Error\n"), 1);
-	memset(&vars,0,sizeof(vars));
-	vars.map = ft_copy_map (ft_fd_init(av[1]));
-	if(!vars.map)
-		return(printf("error"), 1);
-	vars.check_map = ft_copy_map (vars.map);
-	if (ft_check_master(vars.check_map, &vars))
-		return (1);
-	ft_count (vars.check_map, &vars);
-	vars.mlx = mlx_init ();
-	vars.win = mlx_new_window (vars.mlx, vars.col * 50,
-			vars.row * 50, "Many Corp");
-	init_image (&vars);
-	zgag (&vars);
-	mlx_key_hook (vars.win, key_hook, &vars);
-	mlx_loop (vars.mlx);
-	return (0);
+    k = 0;
+    j = 0;
+    if (ac != 2)
+        return (1);
+    if (ft_check_ber(av[1]))
+        return (printf("Error\n"), 1);
+    memset(&vars, 0, sizeof(vars));
+    vars.map = ft_copy_map(ft_fd_init(av[1]));
+    if (!vars.map)
+        return (printf("error"), 1);
+    vars.check_map = ft_copy_map(vars.map);
+    if (ft_check_master(vars.check_map, &vars))
+        return (free_map(vars.map), free_map(vars.check_map), 1);
+    ft_count(vars.check_map, &vars);
+    vars.mlx = mlx_init();
+    vars.win = mlx_new_window(vars.mlx, vars.col * 50,
+                               vars.row * 50, "Many Corp");
+    init_image(&vars);
+    zgag(&vars);
+    mlx_key_hook(vars.win, key_hook, &vars);
+    mlx_loop(vars.mlx);
+    free_map(vars.map);
+    free_map(vars.check_map);
+    vars.map = NULL;
+    vars.check_map = NULL;
+    return (0);
 }
+
