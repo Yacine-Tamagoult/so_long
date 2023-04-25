@@ -6,7 +6,7 @@
 /*   By: soleil <soleil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 22:30:45 by soleil            #+#    #+#             */
-/*   Updated: 2023/04/25 16:10:24 by soleil           ###   ########.fr       */
+/*   Updated: 2023/04/25 16:16:02 by soleil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,8 @@ void freetoutmescopains(t_vars *vars)
 	mlx_destroy_window(vars->mlx, vars->win);
 	mlx_destroy_display(vars->mlx);
 	free_map(vars->map);
+	free_map(vars->check_map);
 	free(vars->mlx);
-
-	
 }
 int	key_hook(int keycode, t_vars *vars)
 {
