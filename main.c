@@ -6,7 +6,7 @@
 /*   By: ilselbon <ilselbon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 21:56:35 by soleil            #+#    #+#             */
-/*   Updated: 2023/04/25 19:47:17 by ilselbon         ###   ########.fr       */
+/*   Updated: 2023/04/25 20:18:57 by ilselbon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	**ft_copy_map(char **tab)
 		return (NULL);
 	while (tab[i])
 		i++;
-`
+	copy = (char **)malloc((i + 1) * sizeof(char *));
 	if (!copy)
 		return (NULL);
 	copy[i] = NULL;
@@ -39,13 +39,6 @@ char	**ft_copy_map(char **tab)
 		}
 		j++;
 	}
-	int o = 0;
-	while(tab[o])
-	{
-		free(tab[o]);
-		o++;
-	}
-	free(tab);
 	return (copy);
 }
 
@@ -138,6 +131,13 @@ int main(int ac, char **av)
     vars.map = ft_copy_map(tab);
     if (!vars.map)
         return (printf("error"), 1);
+	int i = 0;
+	while(tab[i])
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
     vars.check_map = ft_copy_map(vars.map);
     if (ft_check_master(vars.check_map, &vars))
 		return ( free_map(vars.map), free_map(vars.check_map), 1);
