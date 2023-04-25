@@ -6,7 +6,7 @@
 /*   By: soleil <soleil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 23:06:21 by soleil            #+#    #+#             */
-/*   Updated: 2023/04/17 22:47:54 by soleil           ###   ########.fr       */
+/*   Updated: 2023/04/25 16:06:11 by soleil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,6 @@ int	ft_check_cpe(char **tab, t_vars *vars)
 
 int	escape(int key, t_vars *vars)
 {
-	mlx_destroy_window(vars->mlx, vars->win);
+	freetoutmescopains(vars);
 	exit (0);
 }

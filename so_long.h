@@ -6,7 +6,7 @@
 /*   By: soleil <soleil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 22:31:20 by soleil            #+#    #+#             */
-/*   Updated: 2023/04/24 16:50:51 by soleil           ###   ########.fr       */
+/*   Updated: 2023/04/25 16:05:17 by soleil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,6 @@ int		ft_check_horizontal(char **tab, int i, int k);
 int		verif_emplacement(char **fmap, char *map, int *e, char *pos);
 void	count_characters(char **tab, t_vars *vars, int counts[3]);
 int		escape(int key, t_vars *vars);
+void	freetoutmescopains(t_vars *vars);
 
 #endif 
