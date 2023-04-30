@@ -6,7 +6,7 @@
 /*   By: soleil <soleil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 23:10:40 by soleil            #+#    #+#             */
-/*   Updated: 2023/04/25 16:23:10 by soleil           ###   ########.fr       */
+/*   Updated: 2023/04/30 22:55:35 by soleil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,9 @@ int	verif_emplacement(char **fmap, char *map, int *e, char *pos)
 {
 	t_vars	vars;
 
+	(void)vars;
 	vars.i = pos[0];
 	vars.j = pos[1];
-	if (!is_valid_position(fmap, vars.i, vars.j))
-		return (1);
 	if (*map == '0' || *map == 'C' || *map == 'E')
 	{
 		if (*map == 'E' && ft_nombre_de_e_c(fmap, 'C') != 0)
@@ -98,9 +97,9 @@ int	ft_valid_path(char **map, int i, int j, t_vars *vars)
 	static int	e = 0;
 	int			o;
 
-	o = 0;
 	if (ft_nombre_de_e_c(map, 'E') != 0 || ft_nombre_de_e_c(map, 'C') != 0)
 	{
+		o = 0;
 		while (o < 4)
 		{
 			j2 = j + dr[o];

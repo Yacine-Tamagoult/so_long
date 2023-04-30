@@ -6,29 +6,12 @@
 /*   By: soleil <soleil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 22:30:45 by soleil            #+#    #+#             */
-/*   Updated: 2023/04/25 19:01:46 by soleil           ###   ########.fr       */
+/*   Updated: 2023/04/30 23:08:42 by soleil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-
-
-
-void freetoutmescopains(t_vars *vars)
-{
-	
-	mlx_destroy_image(vars->mlx, vars->door);
-	mlx_destroy_image(vars->mlx, vars->flor);
-	mlx_destroy_image(vars->mlx, vars->perso);
-	mlx_destroy_image(vars->mlx, vars->collect);
-	mlx_destroy_image(vars->mlx, vars->wall);
-	mlx_destroy_window(vars->mlx, vars->win);
-	mlx_destroy_display(vars->mlx);
-	free_map(vars->map);
-	free_map(vars->check_map);
-	free(vars->mlx);
-}
 int	key_hook(int keycode, t_vars *vars)
 {
 	if (keycode == 'w' || keycode == 'a' || keycode == 's' || keycode == 'd')
@@ -78,6 +61,7 @@ int	move_up(t_vars *vars)
 		freetoutmescopains(vars);
 		exit(EXIT_SUCCESS);
 	}
+	return (0);
 }
 
 int	move_down(t_vars *vars)
@@ -101,6 +85,7 @@ int	move_down(t_vars *vars)
 		freetoutmescopains(vars);
 		exit(EXIT_SUCCESS);
 	}
+	return (0);
 }
 
 int	move_right(t_vars *vars)
@@ -124,6 +109,7 @@ int	move_right(t_vars *vars)
 		freetoutmescopains(vars);
 		exit(EXIT_SUCCESS);
 	}
+	return (0);
 }
 
 int	move_left(t_vars *vars)
@@ -147,4 +133,5 @@ int	move_left(t_vars *vars)
 		freetoutmescopains(vars);
 		exit(EXIT_SUCCESS);
 	}
+	return (0);
 }

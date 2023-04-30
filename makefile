@@ -12,13 +12,14 @@ SRCS = 	main.c\
 		mayalabeille/get_next_line.c \
 		mayalabeille/get_next_line_utils.c \
 		init_Struct.c \
+		plusdeplace.c \
 		
 
 
 OBJ	= ${SRCS:.c=.o}
 
 
-CFLAGS	= -g 
+CFLAGS	= -g -Wextra -Werror -Wall
 
 .c.o:
 	${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
@@ -31,9 +32,10 @@ all: ${NAME}
 
 clean:
 	${RM} ${OBJ}
+	make clean -C minilibx-linux
 
 fclean: clean
-	${RM} ${NAME} 
+	${RM} ${NAME}
 
 re: fclean all
 

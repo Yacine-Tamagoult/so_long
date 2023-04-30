@@ -6,7 +6,7 @@
 /*   By: soleil <soleil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 22:31:20 by soleil            #+#    #+#             */
-/*   Updated: 2023/04/25 16:05:17 by soleil           ###   ########.fr       */
+/*   Updated: 2023/04/30 23:10:49 by soleil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ char	**ft_maps(char *str, char **tab);
 int		compteur(void);
 int		key_hook(int keycode, t_vars *vars);
 int		ft_count(char **tab, t_vars *vars);
-int	init_image(t_vars *vars);
+int		init_image(t_vars *vars);
 void	print_image(t_vars *vars, char c, int x, int y);
 void	zgag(t_vars *vars);
 int		free_map(char **map);
@@ -82,5 +82,6 @@ int		verif_emplacement(char **fmap, char *map, int *e, char *pos);
 void	count_characters(char **tab, t_vars *vars, int counts[3]);
 int		escape(int key, t_vars *vars);
 void	freetoutmescopains(t_vars *vars);
+void	place(t_vars *vars);
 
 #endif 

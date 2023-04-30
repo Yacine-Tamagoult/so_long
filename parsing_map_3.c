@@ -6,7 +6,7 @@
 /*   By: soleil <soleil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 23:06:21 by soleil            #+#    #+#             */
-/*   Updated: 2023/04/25 17:01:21 by soleil           ###   ########.fr       */
+/*   Updated: 2023/04/30 22:57:42 by soleil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,13 +77,14 @@ int	ft_check_cpe(char **tab, t_vars *vars)
 	vars->count_collect = counts[0];
 	if (counts[1] != 1 || counts[2] != 1 || counts[0] < 1)
 		return (1);
-	else if (ft_valid_path(tab, vars->y, vars->x, vars) == 0)
+	else if (ft_valid_path(tab, vars->x, vars->y, vars) == 0)
 		return (1);
 	return (0);
 }
 
 int	escape(int key, t_vars *vars)
 {
-	freetoutmescopains(vars);
+	if (key)
+		freetoutmescopains(vars);
 	exit (0);
 }

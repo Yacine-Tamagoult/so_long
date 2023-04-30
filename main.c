@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilselbon <ilselbon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: soleil <soleil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 21:56:35 by soleil            #+#    #+#             */
-/*   Updated: 2023/04/26 16:58:32 by ilselbon         ###   ########.fr       */
+/*   Updated: 2023/04/30 23:07:42 by soleil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	**ft_copy_map(char **tab)
 	char	**copy;
 
 	i = 0;
-	if(!tab)
+	if (!tab)
 		return (NULL);
 	while (tab[i])
 		i++;
@@ -27,8 +27,8 @@ char	**ft_copy_map(char **tab)
 	if (!copy)
 		return (NULL);
 	copy[i] = NULL;
-	j = 0;
-	while (j < i)
+	j = -1;
+	while (++j < i)
 	{
 		copy[j] = strdup(tab[j]);
 		if (!copy[j])
@@ -37,7 +37,6 @@ char	**ft_copy_map(char **tab)
 				free(copy[j]);
 			return (free(copy), NULL);
 		}
-		j++;
 	}
 	return (copy);
 }
@@ -62,9 +61,9 @@ char	**ft_maps(char *str, char **tab)
 	}
 	if (j < 0)
 		free (tab);
-	k = 0;
-	while (str[k])
-		map[i][k++] = str[k];
+	k = -1;
+	while (str[++k])
+		map[i][k] = str[k];
 	map[i][k] = 0;
 	map[i + 1] = NULL;
 	i++;
@@ -98,14 +97,13 @@ char	**ft_fd_init(char *file)
 	int		i;
 	char	*str;
 	char	**tab;
-	char	**tmp;
 	int		fd;
 
 	i = 0;
 	tab = NULL;
 	fd = open(file, O_RDONLY);
 	str = get_next_line(fd);
-	if(!str)
+	if (!str)
 		return (NULL);
 	while (str)
 	{
@@ -114,51 +112,30 @@ char	**ft_fd_init(char *file)
 		free(str);
 		str = get_next_line(fd);
 	}
-	return (tab);	
+	return (tab);
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
-    t_vars vars;
-	char **tab;
-    int j;
-    int k;
+	t_vars	vars;
+	char	**tab;
 
-    k = 0;
-    j = 0;
-    if (ac != 2)
-        return (1);
-    if (ft_check_ber(av[1]))
-        return (printf("Error\n"), 1);
-    memset(&vars, 0, sizeof(vars));
-	tab = ft_fd_init(av[1]);
-	if(!tab)
+	if (ac != 2)
+		return (1);
+	if (ft_check_ber(av[1]))
 		return (printf("Error\n"), 1);
-    vars.map = ft_copy_map(tab);
-    if (!vars.map)
-        return (printf("error"), 1);
-    vars.check_map = ft_copy_map(vars.map);
-	// int i = 0;
-	// while(tab[i])
-	// {
-	// 	free(tab[i]);
-	// 	i++;
-	// }
-	// free(tab);
+	memset(&vars, 0, sizeof(vars));
+	tab = ft_fd_init(av[1]);
+	if (!tab)
+		return (printf("Error\n"), 1);
+	vars.map = ft_copy_map(tab);
+	if (!vars.map)
+		return (printf("error"), 1);
+	vars.check_map = ft_copy_map(vars.map);
 	free_map(tab);
-    if (ft_check_master(vars.check_map, &vars))
-		return ( free_map(vars.map), free_map(vars.check_map), 1);
-    ft_count(vars.check_map, &vars);
-    vars.mlx = mlx_init();
-    vars.win = mlx_new_window(vars.mlx, vars.col * 50,
-                               vars.row * 50, "Many Corp");
-    init_image(&vars);
-    zgag(&vars);
-    mlx_key_hook(vars.win, key_hook, &vars);
-    mlx_loop(vars.mlx);
-    free_map(vars.map);
-    free_map(vars.check_map);
-    vars.map = NULL;
-    vars.check_map = NULL;
-    return (0);
+	if (ft_check_master(vars.check_map, &vars))
+		return (free_map(vars.map), free_map(vars.check_map), 1);
+	ft_count(vars.check_map, &vars);
+	place(&vars);
+	return (0);
 }

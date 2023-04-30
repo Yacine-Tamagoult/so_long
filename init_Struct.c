@@ -6,7 +6,7 @@
 /*   By: soleil <soleil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 21:55:53 by soleil            #+#    #+#             */
-/*   Updated: 2023/04/24 16:50:39 by soleil           ###   ########.fr       */
+/*   Updated: 2023/04/30 22:44:42 by soleil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ int	init_image(t_vars *vars)
 			&vars->img_width, &vars->img_height);
 	vars->collect = mlx_xpm_file_to_image(vars->mlx, "image/collect.xpm",
 			&vars->img_width, &vars->img_height);
-	if(!vars->perso || !vars->wall || !vars->flor || !vars->door || !vars->collect)
-	{
+	if (!vars->perso || !vars->wall || !vars->flor
+		|| !vars->door || !vars->collect)
 		return (1);
-	}
+	return (0);
 }
 
 int	ft_count(char **tab, t_vars *vars)
@@ -47,6 +47,7 @@ int	ft_count(char **tab, t_vars *vars)
 	}
 	vars->col = j;
 	vars->row = i;
+	return (0);
 }
 
 void	print_image(t_vars *vars, char c, int x, int y)
