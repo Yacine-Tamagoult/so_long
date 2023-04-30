@@ -21,12 +21,15 @@ OBJ	= ${SRCS:.c=.o}
 
 CFLAGS	= -g -Wextra -Werror -Wall
 
+PRINTF = ft_printf/libftprintf.a
+
 .c.o:
 	${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 
 $(NAME): $(OBJ)
 	make -C minilibx-linux
-	$(CC) $(SRCS) ${CFLAGS} minilibx-linux/libmlx_Linux.a -lXext -lX11 -o $(NAME) 
+	make -C ft_printf
+	$(CC) $(SRCS) ${CFLAGS} $(PRINTF) minilibx-linux/libmlx_Linux.a -lXext -lX11 -o $(NAME) 
 
 all: ${NAME}
 

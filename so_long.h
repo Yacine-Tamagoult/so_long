@@ -6,7 +6,7 @@
 /*   By: soleil <soleil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 22:31:20 by soleil            #+#    #+#             */
-/*   Updated: 2023/04/30 23:10:49 by soleil           ###   ########.fr       */
+/*   Updated: 2023/04/30 23:24:25 by soleil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include "minilibx-linux/mlx.h"
 # include "mayalabeille/get_next_line.h"
 # include <stdio.h>
+# include "ft_printf/ft_printf.h"
 
 typedef struct s_vars {
 	void	*mlx;
